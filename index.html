@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Life — Emergent Behavior Simulation</title>
+    <meta name="description" content="Watch life emerge from simple rules. An interactive particle simulation where attraction and repulsion create organic, mesmerizing patterns.">
+    <meta name="author" content="dprrwt">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Particle Life — Emergent Behavior Simulation">
+    <meta property="og:description" content="Watch life emerge from simple rules. Thousands of particles creating organic patterns.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dprrwt.github.io/particle-life">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <!-- Controls Panel -->
+    <div id="controls" class="controls">
+        <div class="controls-header">
+            <h1>PARTICLE LIFE</h1>
+            <button id="toggle-controls" class="icon-btn" title="Toggle Controls [H]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="controls-body">
+            <!-- Playback Controls -->
+            <div class="control-group">
+                <div class="btn-row">
+                    <button id="play-pause" class="btn primary" title="Play/Pause [Space]">
+                        <span class="play-icon">▶</span>
+                        <span class="pause-icon" style="display:none">❚❚</span>
+                    </button>
+                    <button id="reset" class="btn" title="Reset [R]">↺ RESET</button>
+                    <button id="randomize" class="btn accent" title="New Rules [N]">🎲 NEW</button>
+                </div>
+            </div>
+            
+            <!-- Presets -->
+            <div class="control-group">
+                <label>PRESETS</label>
+                <div class="preset-grid">
+                    <button class="preset-btn" data-preset="random">Random</button>
+                    <button class="preset-btn" data-preset="cells">Cells</button>
+                    <button class="preset-btn" data-preset="swarm">Swarm</button>
+                    <button class="preset-btn" data-preset="predator">Predator</button>
+                    <button class="preset-btn" data-preset="symbiosis">Symbiosis</button>
+                    <button class="preset-btn" data-preset="chains">Chains</button>
+                </div>
+            </div>
+            
+            <!-- Particle Count -->
+            <div class="control-group">
+                <label>PARTICLES: <span id="particle-count-display">1500</span></label>
+                <input type="range" id="particle-count" min="200" max="3000" value="1500" step="100">
+            </div>
+            
+            <!-- Speed -->
+            <div class="control-group">
+                <label>SPEED: <span id="speed-display">1.0</span>x</label>
+                <input type="range" id="speed" min="0.1" max="3" value="1" step="0.1">
+            </div>
+            
+            <!-- Visual Options -->
+            <div class="control-group">
+                <label>VISUALS</label>
+                <div class="toggle-row">
+                    <label class="toggle">
+                        <input type="checkbox" id="trails" checked>
+                        <span>Trails</span>
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" id="glow" checked>
+                        <span>Glow</span>
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" id="wrap" checked>
+                        <span>Wrap</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Rule Matrix Toggle -->
+            <div class="control-group">
+                <button id="show-matrix" class="btn full-width">📊 RULE MATRIX</button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats">
+                <span id="fps">60 FPS</span>
+                <span id="particle-stats">1500 particles</span>
+            </div>
+            
+            <!-- Keyboard Hints -->
+            <div class="hints">
+                <span>SPACE</span> play/pause
+                <span>R</span> reset
+                <span>N</span> new rules
+                <span>H</span> hide UI
+                <span>M</span> matrix
+                <span>CLICK</span> spawn
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rule Matrix Modal -->
+    <div id="matrix-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>INTERACTION MATRIX</h2>
+                <button id="close-matrix" class="icon-btn">✕</button>
+            </div>
+            <p class="matrix-hint">Positive = attraction, Negative = repulsion</p>
+            <div id="matrix-container"></div>
+            <div class="modal-actions">
+                <button id="apply-matrix" class="btn primary">APPLY</button>
+                <button id="randomize-matrix" class="btn">🎲 RANDOMIZE</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Credit -->
+    <a href="https://dprrwt.me" target="_blank" class="credit">dprrwt.me</a>
+    
+    <script src="particle-life.js"></script>
+</body>
+</html>
