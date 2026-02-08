@@ -4,7 +4,6 @@
 
 Watch thousands of particles interact based on attraction and repulsion rules. Organic structures emerge — cells forming, swarms moving, ecosystems evolving — all from basic physics.
 
-![Particle Life](https://raw.githubusercontent.com/dprrwt/particle-life/main/screenshot.png)
 
 ## ✨ Demo
 
